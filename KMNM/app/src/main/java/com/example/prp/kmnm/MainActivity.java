@@ -53,8 +53,8 @@ public class MainActivity extends Activity implements View.OnClickListener{
             ruleWindow.setContentView(popupView);
 
             //タップ時に他のViewでキャッチされないための設定
-            ruleWindow.setOutsideTouchable(true);
-            ruleWindow.setFocusable(true);
+//            ruleWindow.setOutsideTouchable(true);
+//            ruleWindow.setFocusable(true);
 
             //　背景設定
             ruleWindow.setBackgroundDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.popupbackground, null));
