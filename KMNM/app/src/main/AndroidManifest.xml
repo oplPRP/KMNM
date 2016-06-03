@@ -20,4 +20,8 @@
         <activity android:name=".GameActivity"></activity>
     </application>
 
+    <user-permission android:name="android.permission.CAMERA"/>
+    <user-permission android:name="android.permission.WRIGHT_EXTERNAL_STORAGE"/>
+    <user-feature android:name="android.hardware.camera"/>
+
 </manifest>

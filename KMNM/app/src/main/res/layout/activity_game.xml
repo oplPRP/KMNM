@@ -6,6 +6,15 @@
     android:layout_height="match_parent"
     tools:context="com.example.prp.kmnm.MainActivity">
 
+    <SurfaceView
+        android:id="@+id/surface_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/gamePushBtn"
+        android:layout_alignEnd="@+id/gamePushBtn"
+        android:layout_marginEnd="81dp"
+        android:layout_marginBottom="107dp" />
+
     <ImageView
         android:id="@+id/gameBg"
         android:src="@drawable/game_bg"
@@ -24,4 +33,11 @@
         android:layout_marginBottom="15dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/game_hit"
+        android:scaleType="centerCrop" />
+
 </RelativeLayout>
