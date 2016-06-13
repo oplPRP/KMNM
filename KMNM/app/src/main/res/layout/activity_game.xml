@@ -40,4 +40,25 @@
         android:id="@+id/game_hit"
         android:scaleType="centerCrop" />
 
+    <ImageButton
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:id="@+id/imageButton"
+        android:src="@drawable/policybutton"
+        android:scaleType="fitXY"
+        android:background="@null"
+        android:layout_alignParentTop="true"
+        android:layout_alignEnd="@+id/gamePushBtn" />
+
+    <ImageButton
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:id="@+id/policy"
+        android:src="@drawable/policybutton"
+        android:scaleType="fitXY"
+        android:layout_below="@+id/start"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="27dp"
+        android:background="@null"/>
+
 </RelativeLayout>
