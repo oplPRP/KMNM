@@ -1,6 +1,7 @@
 package com.example.prp.kmnm;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.graphics.Camera;
 import android.os.Bundle;
 import android.os.Handler;
@@ -57,7 +58,7 @@ public class GameActivity extends Activity implements View.OnClickListener{
     }
 
     public void onClick (View view) {
-        if (view.getId() == R.id.start) {
+        if (view.getId() == R.id.gamePushBtn) {
             clickCounter = clickCounter + 1;
             Log.d("乱数", String.valueOf(randomNumber));
             Log.d("クリック数", String.valueOf(clickCounter));
@@ -69,7 +70,8 @@ public class GameActivity extends Activity implements View.OnClickListener{
                 timer.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        findViewById(R.id.game_hit).setVisibility(View.INVISIBLE);
+                        Intent intent = new Intent(getApplicationContext(), PostingActivity.class);
+                        startActivity(intent);
                     }
                 }, 1000);
             }
@@ -95,7 +97,7 @@ public class GameActivity extends Activity implements View.OnClickListener{
             ruleWindow.setWidth(viewWidth);
             ruleWindow.setHeight(viewHeight);
 
-            ruleWindow.showAtLocation(findViewById(R.id.background), Gravity.CENTER, 0, 0);
+            ruleWindow.showAtLocation(findViewById(R.id.gameBg), Gravity.CENTER, 0, 0);
 
             //画面内タップで閉じる
             popupView.setOnClickListener(new View.OnClickListener(){
