@@ -3,9 +3,13 @@ package com.example.prp.kmnm;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.graphics.Point;
+import android.media.AudioAttributes;
+import android.media.SoundPool;
+import android.media.SoundPool.OnLoadCompleteListener;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.View;
@@ -23,6 +27,9 @@ public class MainActivity extends Activity implements View.OnClickListener{
 
     int viewWidth;
     int viewHeight;
+    private AudioAttributes audioAttributes;
+    private SoundPool soundpool;
+    private int soundBGM;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +41,26 @@ public class MainActivity extends Activity implements View.OnClickListener{
         ImageButton policyBtn = (ImageButton)findViewById(R.id.policy);
         startBtn.setOnClickListener(this);
         policyBtn.setOnClickListener(this);
+
+        // BGM
+        audioAttributes = new AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_GAME).setContentType(AudioAttributes.CONTENT_TYPE_SPEECH).build();
+        soundpool = new SoundPool.Builder().setAudioAttributes(audioAttributes).setMaxStreams(1).build();
+
+        // BGM事前ロード
+        soundBGM = soundpool.load(this, R.raw.bgm, 1);
+        soundpool.setOnLoadCompleteListener(new OnLoadCompleteListener() {
+            @Override
+            public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
+                soundpool.play(soundBGM, 1.0f, 1.0f, 0, -1, 1);
+            }
+        });
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d("stop", "onstop");
+        soundpool.release();
     }
 
     @Override

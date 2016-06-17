@@ -3,6 +3,8 @@ package com.example.prp.kmnm;
 import android.app.Fragment;
 import android.content.Intent;
 import android.graphics.Camera;
+import android.media.AudioAttributes;
+import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.content.res.ResourcesCompat;
@@ -30,6 +32,12 @@ public class GameActivity extends Activity implements View.OnClickListener{
     int viewWidth;
     int viewHeight;
 
+
+    private AudioAttributes audioAttributes;
+    private SoundPool soundpool;
+    private int soundBGM;
+    private int soundClick;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,13 +48,39 @@ public class GameActivity extends Activity implements View.OnClickListener{
 //        }
 
         // 画像付きボタン
-        ImageButton gameBtn = (ImageButton)findViewById(R.id.gamePushBtn);
+        final ImageButton gameBtn = (ImageButton)findViewById(R.id.gamePushBtn);
         ImageButton policyBtn = (ImageButton)findViewById(R.id.policy);
         gameBtn.setOnClickListener(this);
         policyBtn.setOnClickListener(this);
 
+        // BGM
+        audioAttributes = new AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_GAME).setContentType(AudioAttributes.CONTENT_TYPE_SPEECH).build();
+        soundpool = new SoundPool.Builder().setAudioAttributes(audioAttributes).setMaxStreams(2).build();
+
+        // クリックボタン非活性
+        gameBtn.setEnabled(false);
+
+        // BGM事前ロード
+        soundBGM = soundpool.load(this, R.raw.bgm, 0);
+        soundClick = soundpool.load(this, R.raw.clicksound, 0);
+        soundpool.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
+            @Override
+            public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
+                soundpool.play(soundBGM, 1.0f, 1.0f, 0, -1, 0);
+                // 音声ロードが終わったためボタンを活性
+                gameBtn.setEnabled(true);
+                Log.d("loadcomp", "loadcomp");
+            }
+        });
+
         //乱数生成
         randomNumber = (int)(Math.random()*30)+1;
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        soundpool.release();
     }
 
     @Override
@@ -59,6 +93,7 @@ public class GameActivity extends Activity implements View.OnClickListener{
 
     public void onClick (View view) {
         if (view.getId() == R.id.gamePushBtn) {
+            soundpool.play(soundClick, 1.0f, 1.0f, 1, 0, 0);
             clickCounter = clickCounter + 1;
             Log.d("乱数", String.valueOf(randomNumber));
             Log.d("クリック数", String.valueOf(clickCounter));
