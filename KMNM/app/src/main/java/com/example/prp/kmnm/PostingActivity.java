@@ -3,6 +3,7 @@ package com.example.prp.kmnm;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageButton;
 
@@ -20,6 +21,17 @@ public class PostingActivity extends Activity implements View.OnClickListener{
         ImageButton postBtn = (ImageButton)findViewById(R.id.postbtn);
         menuBtn.setOnClickListener(this);
         postBtn.setOnClickListener(this);
+    }
+
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        if (event.getAction() == KeyEvent.ACTION_DOWN) {
+            switch (event.getKeyCode()) {
+                case KeyEvent.KEYCODE_BACK:
+                    return true;
+            }
+        }
+        return super.dispatchKeyEvent(event);
     }
 
     @Override
