@@ -28,8 +28,10 @@ public class ChooseSNSActivity extends Activity implements View.OnClickListener 
 
         ImageButton menuBtn = (ImageButton)findViewById(R.id.menubtn);
         ImageButton facebookBtn = (ImageButton)findViewById(R.id.facebook);
+        ImageButton twitterBtn = (ImageButton)findViewById(R.id.twitter);
         menuBtn.setOnClickListener(this);
         facebookBtn.setOnClickListener(this);
+        twitterBtn.setOnClickListener(this);
     }
 
     @Override
@@ -50,9 +52,34 @@ public class ChooseSNSActivity extends Activity implements View.OnClickListener 
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
         } else if (view.getId() == R.id.twitter) {
-            //URL
-            String url = "https://api.twitter.com/1.1/statusupdate.json";
+            //Twitter
+            String packageName = "com.twitter.android";
+            String activityName = null;
 
+            PackageManager pm = getPackageManager();
+            Intent intent = new Intent(Intent.ACTION_SEND);
+            intent.setType("image/png");
+            List<ResolveInfo> resolves = pm.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
+            ActivityInfo activityInfo = null;
+            for (ResolveInfo info: resolves) {
+                activityInfo = info.activityInfo;
+                if (activityInfo.packageName.equals(packageName)) {
+                    activityName = activityInfo.name;
+                }
+            }
+
+            //Twitterアプリがない場合
+            if (activityName == null) {
+                Toast t = Toast.makeText(ChooseSNSActivity.this, "not installed", Toast.LENGTH_LONG);
+                t.show();
+                return;
+            }
+            ComponentName componentName = new ComponentName(packageName, activityName);
+            String path_to_img = String.format("android.resource://%s/drawable/%s", getPackageName(), R.drawable.twitter);
+            intent.setComponent(componentName);
+            intent.putExtra(Intent.EXTRA_TEXT, "きみのみからの投稿です");
+            intent.putExtra(Intent.EXTRA_STREAM, Uri.parse(path_to_img));
+            startActivity(intent);
 
         } else if (view.getId() == R.id.line) {
 
@@ -81,7 +108,7 @@ public class ChooseSNSActivity extends Activity implements View.OnClickListener 
                 return;
             }
             ComponentName componentName = new ComponentName(packageName, activityName);
-            intent.setComponent(componentName).putExtra(Intent.EXTRA_TEXT, text);
+            intent.setComponent(componentName);
             startActivity(intent);
         }
 
