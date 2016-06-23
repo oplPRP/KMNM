@@ -74,9 +74,9 @@ public class ChooseSNSActivity extends Activity implements View.OnClickListener 
                 t.show();
                 return;
             }
-            ComponentName componentName = new ComponentName(packageName, activityName);
+//            ComponentName componentName = new ComponentName(packageName, activityName);
             String path_to_img = String.format("android.resource://%s/drawable/%s", getPackageName(), R.drawable.twitter);
-            intent.setComponent(componentName);
+//            intent.setComponent(componentName);
             intent.putExtra(Intent.EXTRA_TEXT, "きみのみからの投稿です");
             intent.putExtra(Intent.EXTRA_STREAM, Uri.parse(path_to_img));
             startActivity(intent);
