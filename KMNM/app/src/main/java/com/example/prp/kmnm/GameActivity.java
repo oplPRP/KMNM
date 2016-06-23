@@ -62,8 +62,8 @@ public class GameActivity extends Activity implements View.OnClickListener{
         gameBtn.setEnabled(false);
 
         // BGM事前ロード
-        soundBGM = soundpool.load(this, R.raw.bgm, 0);
-        soundClick = soundpool.load(this, R.raw.clicksound, 0);
+        soundBGM = soundpool.load(this, R.raw.game_bgm, 0);
+        soundClick = soundpool.load(this, R.raw.hit_se, 0);
         soundpool.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
             @Override
             public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {

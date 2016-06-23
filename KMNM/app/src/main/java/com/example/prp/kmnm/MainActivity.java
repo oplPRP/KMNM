@@ -31,6 +31,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
     private AudioAttributes audioAttributes;
     private SoundPool soundpool;
     private int soundBGM;
+    private int soundClick;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,10 +46,11 @@ public class MainActivity extends Activity implements View.OnClickListener{
 
         // BGM
         audioAttributes = new AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_GAME).setContentType(AudioAttributes.CONTENT_TYPE_SPEECH).build();
-        soundpool = new SoundPool.Builder().setAudioAttributes(audioAttributes).setMaxStreams(1).build();
+        soundpool = new SoundPool.Builder().setAudioAttributes(audioAttributes).setMaxStreams(2).build();
 
         // BGM事前ロード
-        soundBGM = soundpool.load(this, R.raw.bgm, 1);
+        soundBGM = soundpool.load(this, R.raw.home_bgm, 1);
+        soundClick = soundpool.load(this, R.raw.gamestart_se, 1);
         soundpool.setOnLoadCompleteListener(new OnLoadCompleteListener() {
             @Override
             public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
@@ -86,6 +88,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
     public void onClick(View view) {
         if (view.getId() == R.id.start) {
             //ゲーム画面起動
+            soundpool.play(soundClick, 1.0f, 1.0f, 1, 0, 0);
             Intent intent = new Intent(getApplicationContext(), GameActivity.class);
             startActivity(intent);
         } else if (view.getId() == R.id.policy) {
