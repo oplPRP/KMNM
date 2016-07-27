@@ -98,7 +98,7 @@ public class GameActivity extends Activity implements View.OnClickListener{
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
-        RelativeLayout rL = (RelativeLayout)findViewById(R.id.relativeLayout);
+        RelativeLayout rL = (RelativeLayout)findViewById(R.id.gamerelativeLayout);
         viewWidth = rL.getWidth();
         viewHeight = rL.getHeight();
     }
@@ -124,12 +124,12 @@ public class GameActivity extends Activity implements View.OnClickListener{
             }
         }else if (view.getId() == R.id.policy) {
             //ルール説明ポップアップ
-            final PopupWindow ruleWindow = new PopupWindow(GameActivity.this);
+            final PopupWindow ruleWindow = new PopupWindow(getApplicationContext());
 
             //レイアウト設定
             final View popupView = getLayoutInflater().inflate(R.layout.popup_layout, null);
 
-            popupView.setAnimation(AnimationUtils.loadAnimation(GameActivity.this, R.anim.fade_in));
+            popupView.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in));
 
             ruleWindow.setContentView(popupView);
 

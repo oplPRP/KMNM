@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/relativeLayout"
+    android:id="@+id/mainrelativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.prp.kmnm.MainActivity">
@@ -12,15 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:adjustViewBounds="true"
-        android:scaleType="centerCrop"/>
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/title"
-        android:src="@drawable/title_title"
-        android:layout_marginTop="75dp"
-        android:adjustViewBounds="true"/>
+        android:scaleType="centerCrop" />
 
     <ImageButton
         android:layout_width="200dp"
@@ -28,10 +20,9 @@
         android:id="@+id/start"
         android:src="@drawable/startbutton"
         android:scaleType="fitXY"
-        android:layout_marginTop="89dp"
-        android:layout_below="@+id/title"
-        android:layout_centerHorizontal="true"
-        android:background="@null"/>
+        android:background="@null"
+        android:layout_above="@+id/policy"
+        android:layout_centerHorizontal="true" />
 
     <ImageButton
         android:layout_width="75dp"
@@ -39,8 +30,8 @@
         android:id="@+id/policy"
         android:src="@drawable/policybutton"
         android:scaleType="fitXY"
-        android:layout_below="@+id/start"
+        android:background="@null"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="27dp"
-        android:background="@null"/>
+        android:layout_marginBottom="43dp" />
 </RelativeLayout>

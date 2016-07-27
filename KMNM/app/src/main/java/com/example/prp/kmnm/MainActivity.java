@@ -4,6 +4,7 @@ import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.graphics.Point;
 import android.media.AudioAttributes;
+import android.media.Image;
 import android.media.SoundPool;
 import android.media.SoundPool.OnLoadCompleteListener;
 import android.support.v4.content.res.ResourcesCompat;
@@ -75,30 +76,51 @@ public class MainActivity extends Activity implements View.OnClickListener{
         super.onStop();
         Log.d("stop", "onstop");
         soundpool.release();
+        //画面解放
+        cleanupView(findViewById(R.id.mainrelativeLayout));
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        //画面解放
+        cleanupView(findViewById(R.id.mainrelativeLayout));
+    }
+
+    public static final void cleanupView(View view) {
+        if(view instanceof ImageButton) {
+            ImageButton ib = (ImageButton)view;
+            ib.setImageDrawable(null);
+        }
+        view.setBackground(null);
+        Log.d("stop", "clean");
+
     }
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
-        RelativeLayout rL = (RelativeLayout)findViewById(R.id.relativeLayout);
+        RelativeLayout rL = (RelativeLayout)findViewById(R.id.mainrelativeLayout);
         viewWidth = rL.getWidth();
         viewHeight = rL.getHeight();
     }
 
     public void onClick(View view) {
         if (view.getId() == R.id.start) {
+
             //ゲーム画面起動
             soundpool.play(soundClick, 1.0f, 1.0f, 1, 0, 0);
             Intent intent = new Intent(getApplicationContext(), GameActivity.class);
             startActivity(intent);
         } else if (view.getId() == R.id.policy) {
             //ルール説明ポップアップ
-            final PopupWindow ruleWindow = new PopupWindow(MainActivity.this);
+            final PopupWindow ruleWindow = new PopupWindow(getApplicationContext());
 
             //レイアウト設定
             final View popupView = getLayoutInflater().inflate(R.layout.popup_layout, null);
 
-            popupView.setAnimation(AnimationUtils.loadAnimation(MainActivity.this, R.anim.fade_in));
+            popupView.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in));
 
             ruleWindow.setContentView(popupView);
 
