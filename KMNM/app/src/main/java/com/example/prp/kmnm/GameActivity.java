@@ -1,8 +1,11 @@
 package com.example.prp.kmnm;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Camera;
+import android.graphics.drawable.AnimationDrawable;
+import android.graphics.drawable.Drawable;
 import android.media.AudioAttributes;
 import android.media.SoundPool;
 import android.os.Bundle;
@@ -38,6 +41,9 @@ public class GameActivity extends Activity implements View.OnClickListener{
     private SoundPool soundpool;
     private int soundBGM;
     private int soundClick;
+    private int soundHit;
+
+    private ImageView backgroundimage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,14 +62,15 @@ public class GameActivity extends Activity implements View.OnClickListener{
 
         // BGM
         audioAttributes = new AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_GAME).setContentType(AudioAttributes.CONTENT_TYPE_SPEECH).build();
-        soundpool = new SoundPool.Builder().setAudioAttributes(audioAttributes).setMaxStreams(2).build();
+        soundpool = new SoundPool.Builder().setAudioAttributes(audioAttributes).setMaxStreams(5).build();
 
         // クリックボタン非活性
         gameBtn.setEnabled(false);
 
         // BGM事前ロード
         soundBGM = soundpool.load(this, R.raw.game_bgm, 0);
-        soundClick = soundpool.load(this, R.raw.hit_se, 0);
+        soundClick = soundpool.load(this, R.raw.clicksound, 0);
+        soundHit = soundpool.load(this, R.raw.hit_se, 0);
         soundpool.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
             @Override
             public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
@@ -76,6 +83,28 @@ public class GameActivity extends Activity implements View.OnClickListener{
 
         //乱数生成
         randomNumber = (int)(Math.random()*30)+1;
+        frameAnimation();
+    }
+
+    public void frameAnimation (){
+        AnimationDrawable anim = new AnimationDrawable();
+
+        Drawable frame1 = ResourcesCompat.getDrawable(getResources(), R.drawable.kmnm_game1, null);
+        Drawable frame2 = ResourcesCompat.getDrawable(getResources(), R.drawable.kmnm_game2, null);
+        Drawable frame3 = ResourcesCompat.getDrawable(getResources(), R.drawable.kmnm_game3, null);
+        Drawable frame4 = ResourcesCompat.getDrawable(getResources(), R.drawable.kmnm_game4, null);
+
+        anim.addFrame(frame1, 1000);
+        anim.addFrame(frame2, 1000);
+        anim.addFrame(frame3, 1000);
+        anim.addFrame(frame4, 1000);
+
+        backgroundimage = (ImageView)findViewById(R.id.gameBg);
+
+        anim.setOneShot(false);
+        backgroundimage.setImageDrawable(anim);
+
+        anim.start();
     }
 
     @Override
@@ -111,8 +140,9 @@ public class GameActivity extends Activity implements View.OnClickListener{
             Log.d("クリック数", String.valueOf(clickCounter));
             //乱数とタップ数が同じになった時に画像を表示
             if (randomNumber == clickCounter) {
+                soundpool.play(soundHit, 1.0f, 1.0f, 1, 0, 0);
                 ImageView hitImage = (ImageView) findViewById(R.id.game_hit);
-                hitImage.setImageResource(R.drawable.game_hit);
+                hitImage.setImageResource(R.drawable.kmnm_hitget);
                 final Handler timer = new Handler();
                 timer.postDelayed(new Runnable() {
                     @Override

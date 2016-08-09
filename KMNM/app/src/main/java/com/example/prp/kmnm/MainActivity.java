@@ -7,6 +7,7 @@ import android.media.AudioAttributes;
 import android.media.Image;
 import android.media.SoundPool;
 import android.media.SoundPool.OnLoadCompleteListener;
+import android.os.Handler;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -42,6 +43,8 @@ public class MainActivity extends Activity implements View.OnClickListener{
         // 画像付きボタン
         ImageButton startBtn = (ImageButton)findViewById(R.id.start);
         ImageButton policyBtn = (ImageButton)findViewById(R.id.policy);
+        ImageButton gamePolicyBtn = (ImageButton)findViewById(R.id.gamepolicy);
+        gamePolicyBtn.setOnClickListener(this);
         startBtn.setOnClickListener(this);
         policyBtn.setOnClickListener(this);
 
@@ -74,7 +77,6 @@ public class MainActivity extends Activity implements View.OnClickListener{
     @Override
     protected void onStop() {
         super.onStop();
-        Log.d("stop", "onstop");
         soundpool.release();
         //画面解放
         cleanupView(findViewById(R.id.mainrelativeLayout));
@@ -94,8 +96,6 @@ public class MainActivity extends Activity implements View.OnClickListener{
             ib.setImageDrawable(null);
         }
         view.setBackground(null);
-        Log.d("stop", "clean");
-
     }
 
     @Override
@@ -111,8 +111,14 @@ public class MainActivity extends Activity implements View.OnClickListener{
 
             //ゲーム画面起動
             soundpool.play(soundClick, 1.0f, 1.0f, 1, 0, 0);
-            Intent intent = new Intent(getApplicationContext(), GameActivity.class);
-            startActivity(intent);
+            final Handler timer = new Handler();
+            timer.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Intent intent = new Intent(getApplicationContext(), GameActivity.class);
+                    startActivity(intent);
+                }
+            }, 5000);
         } else if (view.getId() == R.id.policy) {
             //ルール説明ポップアップ
             final PopupWindow ruleWindow = new PopupWindow(getApplicationContext());
@@ -139,6 +145,41 @@ public class MainActivity extends Activity implements View.OnClickListener{
 
             //画面内タップで閉じる
             popupView.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View view) {
+                    //fadeoutしない
+//                    popupView.setAnimation(AnimationUtils.loadAnimation(MainActivity.this, R.anim.fade_out));
+                    if (ruleWindow.isShowing()) {
+                        ruleWindow.dismiss();
+                    }
+                }
+            });
+        } else if (view.getId() == R.id.gamepolicy) {
+            //ルール説明ポップアップ
+            final PopupWindow ruleWindow = new PopupWindow(getApplicationContext());
+
+            //レイアウト設定
+            final View popupView = getLayoutInflater().inflate(R.layout.policypopup_layout, null);
+
+            popupView.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in));
+
+            ruleWindow.setContentView(popupView);
+
+            //タップ時に他のViewでキャッチされないための設定
+//            ruleWindow.setOutsideTouchable(true);
+//            ruleWindow.setFocusable(true);
+
+            //　背景設定
+            ruleWindow.setBackgroundDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.popupbackground, null));
+
+            //表示サイズ設定
+            ruleWindow.setWidth(viewWidth);
+            ruleWindow.setHeight(viewHeight);
+
+            ruleWindow.showAtLocation(findViewById(R.id.background), Gravity.CENTER, 0, 0);
+
+            //画面内タップで閉じる
+            popupView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     //fadeoutしない

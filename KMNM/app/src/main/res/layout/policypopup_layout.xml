@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="1">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="272dp"
+        android:layout_weight="0.73"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="50dp"
+        android:fillViewport="false">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="﻿オープラン株式会社（以下「弊社」）は、ユーザ様の心身の安全への配慮、個人情報の保護を重要な責務であると考えております。\n以下にゲームポリシー、ユーザ様の個人情報及びそれに準ずる情報の取り扱いガイドラインを定め、これを遵守し、個人情報の保護に万全を尽くします。\n\nA:ゲームポリシ\n1. SNS連動\n本アプリケーションは、各種SNSアカウントと連携し、ゲーム結果を各SNS(Twitter,Facebook,LINE)へ投稿して遊ぶことができます。\n\n2. ゲーム利用及びSNS投稿をご利用の上での注意\n弊社は本アプリケーションで、日々の飲み会に＋「楽」を提供することを目的としておりますが、それを保証することはできません。ユーザ様のご協力が不可欠です。\n\n（1）いじめ、脅迫、嫌がらせにあたる行為を禁止します。\n（2）過度のもしくは致命的結果を引き起こしうる飲酒の強要を禁止します。\n（3）差別的、暴力的、また猥褻行為にあたる投稿、それらを誘発する投稿を禁止します。\n（4）本アプリケーションを用いた、非合法な行為･暴力的な行為･悪質な行為･誤解を招く行為を禁止します。\n（5）当ゲームポリシーで禁じた行為を助長し推奨する一切を禁止します。\n\n3、免責事項\n\n上記、「2、ゲーム利用及びSNS投稿をご利用の上での注意」において禁止した行為もしくはそれに類推される行為を行った結果、起こる事象の一切（ アプリケーションの利用に関し、トラブルが発生した場合）について、利用者又は第三者に損害が生じた場合であっても、本アプリケーションが利用者の自己責任のもと利用されるものであることに鑑み、弊社は、損害賠償その他一切の責任を負担致しません。\n\n\nB:プライバシーポリシー\n\n1. 個人情報の定義\n\n個人情報とは、個人情報の保護に関する法律に規定される、生存する個人に関する情報（氏名、生年月日、その他の特定の個人を識別することができる情報）ならびに特定の個人と結びついて使用されるメールアドレス、ユーザーID、パスワード、クレジットカードなどの情報、その他の個人に関する属性情報であると認識しています。\n\n2. 個人情報の利用目的\n\n弊社は、お客様から取得した個人情報を、以下の目的のためにのみ利用いたします。\n\n（1）弊社のサービスに対するサポート提供のため\n（2）弊社のサービス利用に関する統計資料の作成のため\n\n3. 個人情報利用目的の変更\n\n弊社は、個人情報の利用目的を変更する場合には、変更前の利用目的と相当の関連性を有すると合理的に認められる範囲を超えては行わず、変更された利用目的については、弊社サイトを通じて、お客様に通知、または公表します。\n\n4. 個人情報の安全管理\n\n弊社は、お客様の個人情報の漏えい、滅失、またはき損などを防止し、お客様の個人情報を安全に管理するため適切な措置を実施するとともに、プライバシーポリシーを掲げ、その継続的改善を行い、従業員に対する必要かつ適切な監督を行います。\n\n5.  従業員の監督\n\n弊社は、個人情報の漏洩、滅失またはき損の防止その他の個人情報の安全管理が図られるよう、従業員に対する必要かつ適切な監督を行います。従業員に個人情報を取り扱わせるにあたっては、個人情報の安全管理が図られるよう、従業員に対する必要かつ適切な監督を行います。\n\n\nC: ゲームポリシー及びプライバシーポリシーの変更\n\n弊社では、各種ポリシーの内容を予告なく変更する場合があります。\n\n2016年8月1日制定"
+            android:textColor="@android:color/black"
+            android:layout_weight="0.22"
+            android:layout_margin="15dp"
+            android:background="@android:color/white" />
+    </ScrollView>
+
+    <!--<ImageView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:id="@+id/title"-->
+        <!--android:src="@drawable/popup_gamepolicy"-->
+        <!--android:adjustViewBounds="true"-->
+        <!--android:scaleType="fitXY"-->
+        <!--android:layout_weight="1"-->
+        <!--android:layout_margin="15dp"/>-->
+</LinearLayout>

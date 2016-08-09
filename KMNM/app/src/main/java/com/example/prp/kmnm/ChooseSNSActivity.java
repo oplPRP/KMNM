@@ -75,15 +75,17 @@ public class ChooseSNSActivity extends Activity implements View.OnClickListener 
                 return;
             }
 //            ComponentName componentName = new ComponentName(packageName, activityName);
-            String path_to_img = String.format("android.resource://%s/drawable/%s", getPackageName(), R.drawable.twitter);
+            String path_to_img = String.format("android.resource://%s/drawable/%s", getPackageName(), R.drawable.kmnm_splash);
 //            intent.setComponent(componentName);
             intent.putExtra(Intent.EXTRA_TEXT, "きみのみからの投稿です");
             intent.putExtra(Intent.EXTRA_STREAM, Uri.parse(path_to_img));
             startActivity(intent);
 
-        } else if (view.getId() == R.id.line) {
-
-        } else if (view.getId() == R.id.facebook) {
+        }
+//        else if (view.getId() == R.id.line) {
+//
+//        }
+        else if (view.getId() == R.id.facebook) {
             //URL
             String packageName = "com.facebook.katana";
             String activityName= null;

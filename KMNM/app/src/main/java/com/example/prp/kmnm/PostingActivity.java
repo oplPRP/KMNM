@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.media.AudioAttributes;
 import android.media.SoundPool;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageButton;
@@ -56,12 +57,24 @@ public class PostingActivity extends Activity implements View.OnClickListener{
     }
 
     @Override
+    protected void onStop() {
+        super.onStop();
+        soundpool.release();
+    }
+
+    @Override
     public void onClick(View view) {
         if (view.getId() == R.id.menubtn) {
             //メニュー画面に戻る
             soundpool.play(soundClick, 1.0f, 1.0f, 1, 0, 0);
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-            startActivity(intent);
+            final Handler timer = new Handler();
+            timer.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Intent intent = new Intent(getApplicationContext(), GameActivity.class);
+                    startActivity(intent);
+                }
+            }, 5000);
         } else if (view.getId() == R.id.postbtn) {
             //投稿画面に遷移
             Intent intent = new Intent(getApplicationContext(), ChooseSNSActivity.class);

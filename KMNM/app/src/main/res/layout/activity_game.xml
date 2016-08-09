@@ -6,18 +6,18 @@
     android:layout_height="match_parent"
     tools:context="com.example.prp.kmnm.MainActivity">
 
-    <SurfaceView
-        android:id="@+id/surface_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/gamePushBtn"
-        android:layout_alignEnd="@+id/gamePushBtn"
-        android:layout_marginEnd="81dp"
-        android:layout_marginBottom="107dp" />
+    <!--<SurfaceView-->
+        <!--android:id="@+id/surface_view"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignBottom="@+id/gamePushBtn"-->
+        <!--android:layout_alignEnd="@+id/gamePushBtn"-->
+        <!--android:layout_marginEnd="81dp"-->
+        <!--android:layout_marginBottom="107dp" />-->
 
     <ImageView
         android:id="@+id/gameBg"
-        android:src="@drawable/game_bg"
+        android:src="@drawable/kmnm_game1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:adjustViewBounds="true"
@@ -27,10 +27,10 @@
         android:layout_width="250dp"
         android:layout_height="250dp"
         android:id="@+id/gamePushBtn"
-        android:src="@drawable/game_pushbtn"
+        android:src="@drawable/pushbutton"
         android:scaleType="fitXY"
         android:background="@null"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="50dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true" />
 
@@ -42,7 +42,9 @@
         android:scaleType="fitXY"
         android:background="@null"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="7dp" />
 
     <ImageView
         android:layout_width="match_parent"

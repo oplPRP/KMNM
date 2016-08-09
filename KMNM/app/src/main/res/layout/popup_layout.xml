@@ -6,17 +6,18 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="ここにルールを記載します。ああああああああああああああああああああああああああああああああああああああああああああああ"
-        android:textColor="@android:color/holo_red_dark"
+        android:text="﻿【きみのみ～キミのみたりてなくない？】\n\nきみのみは「おいしく」「たのしく」お酒をたしなむためのかんたんなゲームです。\n\n１、[はじめる]ボタンでゲーム開始です。\n\n２、ビールジョッキをタップしましょう。\n\n３、好きな回数をタップし、次のプレイヤーに渡してください。\n\n４、当たりのプレイヤーがお酒をゲットです！\n\n５、当たったことやお酒の場のたのしさをSNSに投稿できます。[つぎ]を押してください。\n\n６、つづけてゲームを楽しみたい場合は[もどる]を押してください。\n\n７、たのしい「きみのみ」をお楽しみください。\n\nおいしく、たのしく、しあわせなお時間を❤はばないすでい♪\n\n\nKMNM project(team:PRP)by　OPLN inc."
+        android:textColor="@android:color/black"
         android:layout_weight="1"
-        android:layout_margin="15dp"/>
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/title"
-        android:src="@drawable/popup_gamepolicy"
-        android:adjustViewBounds="true"
-        android:scaleType="fitXY"
-        android:layout_weight="1"
-        android:layout_margin="15dp"/>
+        android:layout_margin="15dp"
+        android:background="@android:color/white"/>
+    <!--<ImageView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:id="@+id/title"-->
+        <!--android:src="@drawable/kmnm_splash"-->
+        <!--android:adjustViewBounds="true"-->
+        <!--android:scaleType="fitXY"-->
+        <!--android:layout_weight="1"-->
+        <!--android:layout_margin="15dp"/>-->
 </LinearLayout>
