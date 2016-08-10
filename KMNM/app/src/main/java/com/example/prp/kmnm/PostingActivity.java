@@ -181,8 +181,8 @@ public class PostingActivity extends Activity implements View.OnClickListener {
                 //配列から最大の組み合わせを取得する
                 mPreviewSize = map.getOutputSizes(SurfaceTexture.class)[0];
 
-                //プレビュー画面のサイズ調整
-                this.configureTransform();
+//                //プレビュー画面のサイズ調整
+//                this.configureTransform();
 
                 if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
                     // TODO: Consider calling
@@ -192,7 +192,7 @@ public class PostingActivity extends Activity implements View.OnClickListener {
                     //                                          int[] grantResults)
                     // to handle the case where the user grants the permission. See the documentation
                     // for ActivityCompat#requestPermissions for more details.
-                    ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 0);
+//                    ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 0);
                     return;
                 }
                 manager.openCamera(strCameraID, new CameraDevice.StateCallback() {
@@ -366,7 +366,11 @@ public class PostingActivity extends Activity implements View.OnClickListener {
                     super.onCaptureCompleted(session, request, result);
                     Toast.makeText(PostingActivity.this, "Saved:"+file, Toast.LENGTH_SHORT).show();
                     //もう一度カメラのプレビュー表示を開始する
-                    createCameraPreviewSession();
+                    ImageView takenPhoto = (ImageView)findViewById(R.id.pictureTaken);
+                    Bitmap bm = BitmapFactory.decodeFile(directory + "/" + filename);
+                    takenPhoto.setImageBitmap(bm);
+                    takenPhoto.bringToFront();
+//                    createCameraPreviewSession();
                 }
             };
             mCameraDevice.createCaptureSession(outputSurfaces, new StateCallback() {
@@ -388,9 +392,8 @@ public class PostingActivity extends Activity implements View.OnClickListener {
             String[] paths = {strSaveDir + "/" + strSaveFilename};
             String[] mimeTypes = {"image/jpeg"};
             MediaScannerConnection.scanFile(getApplicationContext(), paths, mimeTypes, mScanSavedFileCompleted);
-            ImageView takenPhoto = (ImageView)findViewById(R.id.takePhoto);
-            Bitmap bm = BitmapFactory.decodeFile(strSaveDir + "/" + strSaveFilename);
-            takenPhoto.setImageBitmap(bm);
+            directory = strSaveDir;
+            filename = strSaveFilename;
         } catch (CameraAccessException e) {
             e.printStackTrace();
         }
@@ -402,49 +405,49 @@ public class PostingActivity extends Activity implements View.OnClickListener {
         }
     };
 
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        this.configureTransform();
-    }
-    private void configureTransform() {
-        //画面の回転に合わせて
-        if(null == mTextureView || null == mPreviewSize) {
-            return;
-        }
-        Display dsply = getWindowManager().getDefaultDisplay();
-
-        int rotation = dsply.getRotation();
-        Matrix matrix = new Matrix();
-
-        Point pntDisplay = new Point();
-        dsply.getSize(pntDisplay);
-
-        RectF rctView = new RectF(0,0,pntDisplay.x,pntDisplay.y);
-        RectF rctPreview = new RectF(0,0,mPreviewSize.getHeight(),mPreviewSize.getWidth());
-        float centerX = rctView.centerX();
-        float centerY = rctView.centerX();
-
-        rctPreview.offset(centerX - rctPreview.centerX(), centerY - rctPreview.centerY());
-        matrix.setRectToRect(rctView, rctPreview, Matrix.ScaleToFit.FILL);
-        float scale = Math.max((float)rctView.width()/mPreviewSize.getWidth(), (float)rctView.height()/mPreviewSize.getHeight());
-        matrix.postScale(scale,scale,centerX,centerY);
-
-        switch (rotation) {
-            case Surface.ROTATION_0:
-                matrix.postRotate(0,centerX,centerY);
-                break;
-            case Surface.ROTATION_90:
-                matrix.postRotate(270,centerX,centerY);
-                break;
-            case Surface.ROTATION_180:
-                matrix.postRotate(180,centerX,centerY);
-                break;
-            case Surface.ROTATION_270:
-                matrix.postRotate(90,centerX,centerY);
-                break;
-        }
-        mTextureView.setTransform(matrix);
-    }
+//    public void onConfigurationChanged(Configuration newConfig) {
+//        super.onConfigurationChanged(newConfig);
+//        this.configureTransform();
+//    }
+//    private void configureTransform() {
+//        //画面の回転に合わせて
+//        if(null == mTextureView || null == mPreviewSize) {
+//            return;
+//        }
+//        Display dsply = getWindowManager().getDefaultDisplay();
+//
+//        int rotation = dsply.getRotation();
+//        Matrix matrix = new Matrix();
+//
+//        Point pntDisplay = new Point();
+//        dsply.getSize(pntDisplay);
+//
+//        RectF rctView = new RectF(0,0,pntDisplay.x,pntDisplay.y);
+//        RectF rctPreview = new RectF(0,0,mPreviewSize.getHeight(),mPreviewSize.getWidth());
+//        float centerX = rctView.centerX();
+//        float centerY = rctView.centerX();
+//
+//        rctPreview.offset(centerX - rctPreview.centerX(), centerY - rctPreview.centerY());
+//        matrix.setRectToRect(rctView, rctPreview, Matrix.ScaleToFit.FILL);
+//        float scale = Math.max((float)rctView.width()/mPreviewSize.getWidth(), (float)rctView.height()/mPreviewSize.getHeight());
+//        matrix.postScale(scale,scale,centerX,centerY);
+//
+//        switch (rotation) {
+//            case Surface.ROTATION_0:
+//                matrix.postRotate(0,centerX,centerY);
+//                break;
+//            case Surface.ROTATION_90:
+//                matrix.postRotate(270,centerX,centerY);
+//                break;
+//            case Surface.ROTATION_180:
+//                matrix.postRotate(180,centerX,centerY);
+//                break;
+//            case Surface.ROTATION_270:
+//                matrix.postRotate(90,centerX,centerY);
+//                break;
+//        }
+//        mTextureView.setTransform(matrix);
+//    }
 
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {

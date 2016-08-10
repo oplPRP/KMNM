@@ -45,17 +45,17 @@
         android:layout_alignParentEnd="true" />
 
     <TextureView
-        android:layout_width="350dp"
-        android:layout_height="350dp"
+        android:layout_width="300dp"
+        android:layout_height="400dp"
         android:id="@+id/texturePicView"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_above="@+id/menubtn"
+        android:layout_alignStart="@+id/pictureTaken" />
 
     <ImageView
-        android:layout_width="350dp"
-        android:layout_height="350dp"
+        android:layout_width="300dp"
+        android:layout_height="400dp"
         android:id="@+id/pictureTaken"
-        android:layout_alignTop="@+id/texturePicView"
+        android:layout_above="@+id/menubtn"
         android:layout_centerHorizontal="true" />
 
 
