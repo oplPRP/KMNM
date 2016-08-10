@@ -21,6 +21,9 @@ import java.util.List;
  */
 public class ChooseSNSActivity extends Activity implements View.OnClickListener {
 
+    private String directory;
+    private String filename;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +35,10 @@ public class ChooseSNSActivity extends Activity implements View.OnClickListener 
         menuBtn.setOnClickListener(this);
         facebookBtn.setOnClickListener(this);
         twitterBtn.setOnClickListener(this);
+
+        Intent intent = getIntent();
+        directory = intent.getStringExtra("directory");
+        filename = intent.getStringExtra("filename");
     }
 
     @Override
@@ -75,7 +82,7 @@ public class ChooseSNSActivity extends Activity implements View.OnClickListener 
                 return;
             }
 //            ComponentName componentName = new ComponentName(packageName, activityName);
-            String path_to_img = String.format("android.resource://%s/drawable/%s", getPackageName(), R.drawable.kmnm_splash);
+            String path_to_img = String.format("%s/%s", directory, filename);
 //            intent.setComponent(componentName);
             intent.putExtra(Intent.EXTRA_TEXT, "きみのみからの投稿です");
             intent.putExtra(Intent.EXTRA_STREAM, Uri.parse(path_to_img));

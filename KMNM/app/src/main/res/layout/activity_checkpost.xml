@@ -14,14 +14,6 @@
         android:adjustViewBounds="true"
         android:scaleType="centerCrop"/>
 
-    <ImageView
-        android:layout_width="300dp"
-        android:layout_height="400dp"
-        android:id="@+id/uploadimage"
-        android:src="@drawable/kmnm_splash"
-        android:layout_above="@+id/menubtn"
-        android:layout_centerHorizontal="true" />
-
     <ImageButton
         android:layout_width="75dp"
         android:layout_height="75dp"
@@ -29,9 +21,18 @@
         android:src="@drawable/backbutton"
         android:scaleType="fitXY"
         android:background="@null"
-        android:layout_marginStart="66dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true" />
+
+    <ImageButton
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:id="@+id/takePhoto"
+        android:src="@drawable/backbutton"
+        android:scaleType="fitXY"
+        android:background="@null"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
 
     <ImageButton
         android:layout_width="75dp"
@@ -40,9 +41,22 @@
         android:src="@drawable/nextbutton"
         android:scaleType="fitXY"
         android:background="@null"
-        android:layout_marginEnd="66dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true" />
+
+    <TextureView
+        android:layout_width="350dp"
+        android:layout_height="350dp"
+        android:id="@+id/texturePicView"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:layout_width="350dp"
+        android:layout_height="350dp"
+        android:id="@+id/pictureTaken"
+        android:layout_alignTop="@+id/texturePicView"
+        android:layout_centerHorizontal="true" />
 
 
 </RelativeLayout>
