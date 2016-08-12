@@ -181,8 +181,8 @@ public class PostingActivity extends Activity implements View.OnClickListener {
                 //配列から最大の組み合わせを取得する
                 mPreviewSize = map.getOutputSizes(SurfaceTexture.class)[0];
 
-//                //プレビュー画面のサイズ調整
-//                this.configureTransform();
+                //プレビュー画面のサイズ調整
+                this.configureTransform();
 
                 if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
                     // TODO: Consider calling
@@ -294,6 +294,7 @@ public class PostingActivity extends Activity implements View.OnClickListener {
                     height = jpegSizes[0].getHeight();
                 }
             }
+
             //画像を取得するためのImageReaderの作成
             ImageReader reader = ImageReader.newInstance(width, height, ImageFormat.JPEG, 1);
             List outputSurfaces = new ArrayList(2);
@@ -366,10 +367,6 @@ public class PostingActivity extends Activity implements View.OnClickListener {
                     super.onCaptureCompleted(session, request, result);
                     Toast.makeText(PostingActivity.this, "Saved:"+file, Toast.LENGTH_SHORT).show();
                     //もう一度カメラのプレビュー表示を開始する
-                    ImageView takenPhoto = (ImageView)findViewById(R.id.pictureTaken);
-                    Bitmap bm = BitmapFactory.decodeFile(directory + "/" + filename);
-                    takenPhoto.setImageBitmap(bm);
-                    takenPhoto.bringToFront();
 //                    createCameraPreviewSession();
                 }
             };
@@ -394,6 +391,10 @@ public class PostingActivity extends Activity implements View.OnClickListener {
             MediaScannerConnection.scanFile(getApplicationContext(), paths, mimeTypes, mScanSavedFileCompleted);
             directory = strSaveDir;
             filename = strSaveFilename;
+            ImageView takenPhoto = (ImageView)findViewById(R.id.pictureTaken);
+            Bitmap bm = BitmapFactory.decodeFile(directory + "/" + filename);
+            takenPhoto.setImageBitmap(bm);
+            takenPhoto.bringToFront();
         } catch (CameraAccessException e) {
             e.printStackTrace();
         }
@@ -405,49 +406,49 @@ public class PostingActivity extends Activity implements View.OnClickListener {
         }
     };
 
-//    public void onConfigurationChanged(Configuration newConfig) {
-//        super.onConfigurationChanged(newConfig);
-//        this.configureTransform();
-//    }
-//    private void configureTransform() {
-//        //画面の回転に合わせて
-//        if(null == mTextureView || null == mPreviewSize) {
-//            return;
-//        }
-//        Display dsply = getWindowManager().getDefaultDisplay();
-//
-//        int rotation = dsply.getRotation();
-//        Matrix matrix = new Matrix();
-//
-//        Point pntDisplay = new Point();
-//        dsply.getSize(pntDisplay);
-//
-//        RectF rctView = new RectF(0,0,pntDisplay.x,pntDisplay.y);
-//        RectF rctPreview = new RectF(0,0,mPreviewSize.getHeight(),mPreviewSize.getWidth());
-//        float centerX = rctView.centerX();
-//        float centerY = rctView.centerX();
-//
-//        rctPreview.offset(centerX - rctPreview.centerX(), centerY - rctPreview.centerY());
-//        matrix.setRectToRect(rctView, rctPreview, Matrix.ScaleToFit.FILL);
-//        float scale = Math.max((float)rctView.width()/mPreviewSize.getWidth(), (float)rctView.height()/mPreviewSize.getHeight());
-//        matrix.postScale(scale,scale,centerX,centerY);
-//
-//        switch (rotation) {
-//            case Surface.ROTATION_0:
-//                matrix.postRotate(0,centerX,centerY);
-//                break;
-//            case Surface.ROTATION_90:
-//                matrix.postRotate(270,centerX,centerY);
-//                break;
-//            case Surface.ROTATION_180:
-//                matrix.postRotate(180,centerX,centerY);
-//                break;
-//            case Surface.ROTATION_270:
-//                matrix.postRotate(90,centerX,centerY);
-//                break;
-//        }
-//        mTextureView.setTransform(matrix);
-//    }
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        this.configureTransform();
+    }
+    private void configureTransform() {
+        //画面の回転に合わせて
+        if(null == mTextureView || null == mPreviewSize) {
+            return;
+        }
+        Display dsply = getWindowManager().getDefaultDisplay();
+
+        int rotation = dsply.getRotation();
+        Matrix matrix = new Matrix();
+
+        Point pntDisplay = new Point();
+        dsply.getSize(pntDisplay);
+
+        RectF rctView = new RectF(0,0,pntDisplay.x,pntDisplay.y);
+        RectF rctPreview = new RectF(0,0,mPreviewSize.getHeight(),mPreviewSize.getWidth());
+        float centerX = rctView.centerX();
+        float centerY = rctView.centerX();
+
+        rctPreview.offset(centerX - rctPreview.centerX(), centerY - rctPreview.centerY());
+        matrix.setRectToRect(rctView, rctPreview, Matrix.ScaleToFit.FILL);
+        float scale = Math.max((float)rctView.width()/mPreviewSize.getWidth(), (float)rctView.height()/mPreviewSize.getHeight());
+        matrix.postScale(scale,scale,centerX,centerY);
+
+        switch (rotation) {
+            case Surface.ROTATION_0:
+                matrix.postRotate(0,centerX,centerY);
+                break;
+            case Surface.ROTATION_90:
+                matrix.postRotate(270,centerX,centerY);
+                break;
+            case Surface.ROTATION_180:
+                matrix.postRotate(180,centerX,centerY);
+                break;
+            case Surface.ROTATION_270:
+                matrix.postRotate(90,centerX,centerY);
+                break;
+        }
+        mTextureView.setTransform(matrix);
+    }
 
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
