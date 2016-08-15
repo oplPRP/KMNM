@@ -81,6 +81,8 @@ public class PostingActivity extends Activity implements View.OnClickListener {
     private String directory;
     private String filename;
 
+    private ImageButton postBtn;
+
     //Camera
     private Size mPreviewSize;
     private TextureView mTextureView;
@@ -114,8 +116,9 @@ public class PostingActivity extends Activity implements View.OnClickListener {
         mBtnTakingPhoto.setOnClickListener(mBtnShotClicked);
 
         ImageButton menuBtn = (ImageButton) findViewById(R.id.menubtn);
-        ImageButton postBtn = (ImageButton) findViewById(R.id.postbtn);
+        postBtn = (ImageButton) findViewById(R.id.postbtn);
         menuBtn.setOnClickListener(this);
+        postBtn.setVisibility(View.INVISIBLE);
         postBtn.setOnClickListener(this);
 
         // BGM
@@ -160,6 +163,7 @@ public class PostingActivity extends Activity implements View.OnClickListener {
         @Override
         public void onClick(View v) {
             takePicture();
+            postBtn.setVisibility(View.VISIBLE);
         }
     };
 
@@ -305,9 +309,9 @@ public class PostingActivity extends Activity implements View.OnClickListener {
             captureBuilder.addTarget(reader.getSurface());
             captureBuilder.set(CaptureRequest.CONTROL_MODE, CameraMetadata.CONTROL_MODE_AUTO);
 
-            //画像を調整する
-            int rotation = getWindowManager().getDefaultDisplay().getRotation();
-            captureBuilder.set(CaptureRequest.JPEG_ORIENTATION, ORIENTATIONS.get(rotation));
+//            //画像を調整する
+//            int rotation = getWindowManager().getDefaultDisplay().getRotation();
+//            captureBuilder.set(CaptureRequest.JPEG_ORIENTATION, ORIENTATIONS.get(rotation));
 
             //ファイルの保存先のディレクトリとファイル名
             //TODO ここチェックして
@@ -366,6 +370,7 @@ public class PostingActivity extends Activity implements View.OnClickListener {
                     //画像の保存が完了したらToast表示
                     super.onCaptureCompleted(session, request, result);
                     Toast.makeText(PostingActivity.this, "Saved:"+file, Toast.LENGTH_SHORT).show();
+
                     //もう一度カメラのプレビュー表示を開始する
 //                    createCameraPreviewSession();
                 }
