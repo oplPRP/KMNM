@@ -12,10 +12,15 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.content.res.ResourcesCompat;
 import android.util.StringBuilderPrinter;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import java.io.File;
@@ -34,6 +39,9 @@ import com.facebook.share.widget.ShareDialog;
  */
 public class ChooseSNSActivity extends Activity implements View.OnClickListener {
 
+//    int viewWidth;
+//    int viewHeight;
+
     private static String directory;
     private static String filename;
 
@@ -48,9 +56,12 @@ public class ChooseSNSActivity extends Activity implements View.OnClickListener 
         ImageButton menuBtn = (ImageButton)findViewById(R.id.menubtn);
         ImageButton facebookBtn = (ImageButton)findViewById(R.id.facebook);
         ImageButton twitterBtn = (ImageButton)findViewById(R.id.twitter);
+//        ImageButton gamePolicyBtn = (ImageButton)findViewById(R.id.gamepolicy);
+
         menuBtn.setOnClickListener(this);
         facebookBtn.setOnClickListener(this);
         twitterBtn.setOnClickListener(this);
+//        gamePolicyBtn.setOnClickListener(this);
 
         Intent intent = getIntent();
         directory = intent.getStringExtra("directory");
@@ -87,6 +98,13 @@ public class ChooseSNSActivity extends Activity implements View.OnClickListener 
     }
 
     @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        RelativeLayout rL = (RelativeLayout)findViewById(R.id.mainrelativeLayout);
+//        viewWidth = rL.getWidth();
+//        viewHeight = rL.getHeight();
+    }
+
     public void onClick(View view) {
         if (view.getId() == R.id.menubtn) {
             //メニュー画面に戻る
@@ -162,6 +180,42 @@ public class ChooseSNSActivity extends Activity implements View.OnClickListener 
 //            intent.putExtra(Intent.EXTRA_STREAM, Uri.parse(path_to_img));
 //            startActivity(intent);
         }
+//        else if (view.getId() == R.id.gamepolicy) {
+//            //ルール説明ポップアップ
+//            final PopupWindow ruleWindow = new PopupWindow(getApplicationContext());
+//
+//            //レイアウト設定
+//            final View popupView = getLayoutInflater().inflate(R.layout.policypopup_layout, null);
+//
+//            popupView.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in));
+//
+//            ruleWindow.setContentView(popupView);
+//
+//            //タップ時に他のViewでキャッチされないための設定
+////            ruleWindow.setOutsideTouchable(true);
+////            ruleWindow.setFocusable(true);
+//
+//            //　背景設定
+//            ruleWindow.setBackgroundDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.popupbackground, null));
+//
+//            //表示サイズ設定
+//            ruleWindow.setWidth(viewWidth);
+//            ruleWindow.setHeight(viewHeight);
+//
+//            ruleWindow.showAtLocation(findViewById(R.id.background), Gravity.CENTER, 0, 0);
+//
+//            //画面内タップで閉じる
+//            popupView.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    //fadeoutしない
+////                    popupView.setAnimation(AnimationUtils.loadAnimation(MainActivity.this, R.anim.fade_out));
+//                    if (ruleWindow.isShowing()) {
+//                        ruleWindow.dismiss();
+//                    }
+//                }
+//            });
+//        }
 
     }
 }

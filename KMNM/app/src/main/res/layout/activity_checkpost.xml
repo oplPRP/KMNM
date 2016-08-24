@@ -8,11 +8,13 @@
 
     <ImageView
         android:id="@+id/background"
-        android:src="@drawable/kmnm_background0c"
+        android:src="@drawable/kmnm_toukou"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:adjustViewBounds="true"
-        android:scaleType="centerCrop"/>
+        android:scaleType="fitXY"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true" />
 
     <ImageButton
         android:layout_width="75dp"
@@ -21,18 +23,9 @@
         android:src="@drawable/backbutton"
         android:scaleType="fitXY"
         android:background="@null"
+        android:layout_marginEnd="75dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true" />
-
-    <ImageButton
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:id="@+id/takePhoto"
-        android:src="@drawable/backbutton"
-        android:scaleType="fitXY"
-        android:background="@null"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_toStartOf="@+id/postbtn" />
 
     <ImageButton
         android:layout_width="75dp"
@@ -42,20 +35,31 @@
         android:scaleType="fitXY"
         android:background="@null"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignEnd="@+id/texturePicView"
+        android:layout_marginEnd="55dp" />
+
+    <ImageButton
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:id="@+id/takePhoto"
+        android:src="@drawable/kmnm_2cameraoff"
+        android:scaleType="fitXY"
+        android:background="@null"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/postbtn" />
 
     <TextureView
-        android:layout_width="400dp"
+        android:layout_width="320dp"
         android:layout_height="560dp"
         android:id="@+id/texturePicView"
-        android:layout_above="@+id/menubtn"
-        android:layout_alignStart="@+id/pictureTaken" />
+        android:layout_marginTop="125dp"
+        android:layout_centerHorizontal="true" />
 
     <ImageView
-        android:layout_width="400dp"
+        android:layout_width="320dp"
         android:layout_height="560dp"
         android:id="@+id/pictureTaken"
-        android:layout_above="@+id/menubtn"
+        android:layout_marginTop="125dp"
         android:layout_centerHorizontal="true" />
 
 

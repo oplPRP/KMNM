@@ -164,6 +164,9 @@ public class PostingActivity extends Activity implements View.OnClickListener {
         public void onClick(View v) {
             takePicture();
             postBtn.setVisibility(View.VISIBLE);
+            postBtn.bringToFront();
+            mBtnTakingPhoto.setVisibility(View.INVISIBLE);
+            mBtnTakingPhoto.setEnabled(false);
         }
     };
 
@@ -400,6 +403,8 @@ public class PostingActivity extends Activity implements View.OnClickListener {
             Bitmap bm = BitmapFactory.decodeFile(directory + "/" + filename);
             takenPhoto.setImageBitmap(bm);
             takenPhoto.bringToFront();
+            ImageView background = (ImageView)findViewById(R.id.background);
+            background.setImageResource(R.drawable.kmnm_toukou2);
         } catch (CameraAccessException e) {
             e.printStackTrace();
         }
